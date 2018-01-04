@@ -1,0 +1,161 @@
+.contenidoComponente{
+  position: absolute;
+ float: none;
+ text-align: center;
+ left: 20%;
+
+
+}
+.contenedor{
+  position: absolute;
+  display:block;
+  background-color: white;
+  width: 100%;
+  height: 100%;
+
+
+}
+.contenedor ul#lista li a{
+  text-decoration: none;
+  color: white;
+  margin: 5%;
+  padding:0;
+  width: 100%;
+  font-family: inherit;
+
+}
+.contenedor #lista li{
+  width: 95%;
+}
+.contenedor #lista{
+  list-style: none;
+  background-color: #221F1F;
+  padding: 0;
+  margin:0;
+  margin-top: 2em;
+}
+#barraLateral{
+  float: left;
+  display: relative;
+  width: 20%;
+  height: 100%;
+  z-index:1;
+  background-color: #221F1F;
+}
+@media (max-width: 900px) {
+  #barraLateral{
+    width: 40%;
+    height: 100%;
+  }
+  div#curruser p {
+    font-size: 1.5em;
+}
+}
+@media (max-width: 700px) {
+  #barraLateral{
+    width: 40%;
+    height: 100%;
+  }
+  div#curruser p {
+    font-size: .9em;
+}
+}
+@media (max-width: 1000px) {
+  #barraLateral{
+    width: 20%;
+    height: 100%;
+  }
+  div#curruser p {
+    font-size: .9em;
+}
+
+}
+.contenedor .contenidoComponente img{
+  width: 100%;
+  padding: 2%;
+
+}
+
+p.navOptions {
+    color: white;
+    padding: 0;
+}
+
+span.logoActual {
+    display: inline-flex;
+}
+span.logoSubir {
+    display: inline-flex;
+}
+span.logoHistorial {
+    display: inline-flex;
+}
+span.logoAnalitics {
+    display: inline-flex;
+}
+#lista li {
+    padding-top: 5%;
+    padding-bottom: 3%;
+}
+#lista li a:hover{
+  background-color: #044A62;
+}
+
+div#logobarra {
+    width: 50%;
+    height: 0%;
+    margin-left: 26%;
+    margin-top: 5%;
+}
+
+#logobarra .text{
+  position: relative;
+  visibility: hidden;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  color: cadetblue;
+  font-size: medium;
+}
+
+#logobarra img {
+  cursor: pointer;
+}
+
+#logobarra:hover .text{
+  visibility: visible;
+}
+
+div#logobarra2 {
+    width: 30%;
+    height: 0%;
+    margin-left: 26%;
+    margin-top: 15%;
+}
+
+#bienvenida p {
+    margin: 0;
+    border: 0;
+    padding: 0;
+    text-align: center;
+    color:#00A0AE;
+}
+
+p#parBienv{
+  color: white;
+}
+
+#bienvenida{
+  margin-top: 70%;
+}
+
+#salirPromo a{
+  color: #00A0AE;
+  text-decoration: underline;
+}
+
+#salirPromo a:hover{
+  color: #044A62 ;
+  text-decoration: underline;
+  background-color: transparent;
+}
