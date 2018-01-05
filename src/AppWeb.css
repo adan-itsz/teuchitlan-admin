@@ -9,7 +9,7 @@
 .contenedor{
   position: absolute;
   display:block;
-  background-color: white;
+  background-color:#131313;
   width: 100%;
   height: 100%;
 
@@ -26,6 +26,8 @@
 }
 .contenedor #lista li{
   width: 95%;
+  text-align: center;
+  padding-top: 0
 }
 .contenedor #lista{
   list-style: none;
@@ -37,7 +39,7 @@
 #barraLateral{
   float: left;
   display: relative;
-  width: 20%;
+  width: 15%;
   height: 100%;
   z-index:1;
   background-color: #221F1F;
@@ -79,6 +81,7 @@
 p.navOptions {
     color: white;
     padding: 0;
+    margin: 0
 }
 
 span.logoActual {
@@ -158,4 +161,68 @@ p#parBienv{
   color: #044A62 ;
   text-decoration: underline;
   background-color: transparent;
+}
+
+.beacons:hover{
+background-color: #600E02;
+}
+.beaconsInactivo:hover{
+background-color: #2C2B2B;
+}
+
+.beacons{
+  padding-bottom: 5vh;
+  background-color: #D32004;
+}
+.beaconsInactivo{
+  padding-bottom: 5vh;
+  background-color: #221F1F;
+}
+
+
+.lugares{
+  padding-bottom: 5vh;
+  background-color: #D32004;
+}
+.lugares:hover{
+  background-color: #600E02;
+}
+
+.lugaresInactivos{
+  padding-bottom: 5vh;
+  background-color: #221F1F;
+}
+.lugaresInactivos:hover{
+  background-color: #2C2B2B;
+}
+
+
+.historicos{
+  padding-bottom: 5vh;
+  background-color: #D32004;
+}
+
+.historicosInactivos{
+  padding-bottom: 5vh;
+  background-color: #221F1F;
+}
+
+.historicos:hover{
+  background-color: #600E02;
+}
+.historicosInactivos:hover{
+  padding-bottom: 5vh;
+  background-color: #2C2B2B;
+}
+
+.first{
+  height: 10vh
+}
+.actual{
+  background-color:#C70039;
+}
+
+.icono{
+  left: 100px;
+  text-align: center;
 }
