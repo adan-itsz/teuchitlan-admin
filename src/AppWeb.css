@@ -2,7 +2,7 @@
   position: absolute;
  float: none;
  text-align: center;
- left: 20%;
+ left: 15%;
 
 
 }
@@ -225,4 +225,33 @@ background-color: #2C2B2B;
 .icono{
   left: 100px;
   text-align: center;
+}
+
+
+.txt2{
+
+}
+
+.listaLugares{
+  text-align: center;
+  padding-left: 60%;
+  padding-top: 10%
+}
+.textField1{
+  left: 60vh;
+position:absolute;
+bottom: 68vh
+}
+.textField2{
+  left: 25vh;
+position:absolute;
+bottom: 58vh
+}
+.textField3{
+left: 60vh;
+position:absolute;
+bottom: 63vh
+}
+.inputFotos{
+border-bottom: 100vh;
 }
