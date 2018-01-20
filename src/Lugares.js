@@ -29,11 +29,49 @@ const customContentStyle = {
 class Lugares extends Component {
   constructor(){
     super();
-
+    this.tomarDatos=this.tomarDatos.bind(this);
   }
   state = {
    open: false,
+   datos:[],
+   imagenes:[]
  };
+
+ subirLugar=()=>{
+   var imagenes=[];
+   var self=this;
+   var promesa=new Promise(
+     function(resolve,reject){
+
+      self.state.datos.fotos.map((item)=>(
+        resolve(imagenes=imagenes.concat(item))
+      ))
+    }
+  )
+  promesa.then(
+    function(){
+      self.setState({
+        imagenes:imagenes,
+        id:self.state.datos.id,
+        tipo:self.state.datos.tipo,
+        ubicacion:self.state.datos.ubicacion,
+        nombre:self.state.datos.nombre,
+        descripcion:self.state.descripcion
+      })
+      //llamada a metodo para subir a BD
+      console.log(self.state.id);
+    }
+  );
+
+
+   this.handleClose();
+ }
+
+ tomarDatos=(array)=>{
+   this.setState({
+     datos:array
+   })
+ }
 
  handleOpen = () => {
    this.setState({open: true});
@@ -46,14 +84,14 @@ class Lugares extends Component {
   render() {
     const actions = [
          <FlatButton
-           label="Cancel"
+           label="Cancelar"
            primary={true}
            onClick={this.handleClose}
          />,
          <FlatButton
-           label="Submit"
+           label="Aceptar"
            primary={true}
-           onClick={this.handleClose}
+           onClick={this.subirLugar}
          />,
        ];
     return (
@@ -93,7 +131,7 @@ class Lugares extends Component {
                contentStyle={customContentStyle}
                open={this.state.open}
              >
-             <AddLugares/>
+             <AddLugares datos={this.tomarDatos}/>
              </Dialog>
 
             </MuiThemeProvider>

@@ -38,16 +38,76 @@ const styles = {
   },
 };
 
+function Sitio(){
+  this.id;
+  this.nombre;
+  this.idBeacon;
+  this.datoHistorico;
+  this.datoCultural;
+  this.datoCurioso;
+  this.datoInteres;
+  this.fotos;
+}
+
+var sitio=new Sitio();
+
 
 class AddSitioHistorico extends Component {
+
+  constructor(props){
+    super(props)
+  }
 
   state={
     imagenes:[{url:'http://v.fastcdn.co/u/abda26b9/20243556-0-react-logo.png'}]
   }
 
-  previaImagenes=()=>{
+  handleIdSitio=(event)=>{
 
-  }
+    sitio.id=event.target.value;
+    this.props.datos(sitio);
+
+  };
+
+  handlenombre=(event)=>{
+
+    sitio.nombre=event.target.value;
+    this.props.datos(sitio);
+
+  };
+  handleIdBeacon=(event)=>{
+
+    sitio.idBeacon=event.target.value;
+    this.props.datos(sitio);
+
+  };
+  handleDatoHistorico=(event)=>{
+
+    sitio.datoHistorico=event.target.value;
+    this.props.datos(sitio);
+
+  };
+
+  handleDatoCultural=(event)=>{
+
+    sitio.datoCultural=event.target.value;
+    this.props.datos(sitio);
+
+  };
+
+  handleDatoCurioso=(event)=>{
+
+    sitio.datoCurioso=event.target.value;
+    this.props.datos(sitio);
+
+  };
+  handleDatoInteres=(event)=>{
+
+    sitio.datoInteres=event.target.value;
+    this.props.datos(sitio);
+
+  };
+
 
   seleccionarFoto=(event)=>{
 
@@ -61,7 +121,7 @@ class AddSitioHistorico extends Component {
                 imagenes:this.state.imagenes.concat([{url:reader.result}]),
 
               });
-              console.log(file.webkitRelativePath);
+              sitio.fotos=this.state.imagenes
           };
           reader.readAsDataURL(file);
       }
@@ -76,23 +136,27 @@ class AddSitioHistorico extends Component {
         <TextField
            hintText="ID "
            underlineStyle={styles.underlineStyle}
+           onChange={this.handleIdSitio}
          />
          <div className="txt2">
          <TextField
             hintText="Nombre"
             underlineStyle={styles.underlineStyle}
+            onChange={this.handleNombre}
           />
           </div>
           <br/>
           <TextField
              hintText="ID Beacon"
              underlineStyle={styles.underlineStyle}
+             onChange={this.handleIdBeacon}
            /><br />
            <TextField
               hintText="información"
               floatingLabelText="Dato Historico"
               multiLine={true}
               underlineStyle={styles.underlineStyle}
+              onChange={this.handleDatoHistorico}
               rows={2}
             /><br />
 
@@ -109,7 +173,7 @@ class AddSitioHistorico extends Component {
                        titleStyle={styles.titleStyle}
                        titleBackground="linear-gradient(to top, rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.3) 70%,rgba(0,0,0,0) 100%)"
                      >
-                    
+
                       <img src={tile.url} />
                      </GridTile>
                    ))}
@@ -122,6 +186,7 @@ class AddSitioHistorico extends Component {
            multiLine={true}
            underlineStyle={styles.underlineStyle}
            rows={2}
+           onChange={this.handleDatoCultural}
            className="textField1"
          />
 
@@ -131,6 +196,7 @@ class AddSitioHistorico extends Component {
             multiLine={true}
             underlineStyle={styles.underlineStyle}
             rows={2}
+            onChange={this.handleDatoCurioso}
             className="textField2"
 
           /><br /><br/>
@@ -140,6 +206,7 @@ class AddSitioHistorico extends Component {
              multiLine={true}
              underlineStyle={styles.underlineStyle}
              rows={2}
+             onChange={this.handleDatoInteres}
              className="textField3"
 
            />

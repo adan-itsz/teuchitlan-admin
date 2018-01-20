@@ -9,6 +9,7 @@ import FlatButton from 'material-ui/FlatButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import Dialog from 'material-ui/Dialog';
 import BeaconASubir from './beaconAsubir.js'
+import { ref } from './const.js'
 
 import {
   Table,
@@ -34,10 +35,13 @@ const customContentStyle = {
 class BeaconsActivos extends Component {
   constructor(){
     super();
+    this.tomarDatos = this.tomarDatos.bind(this);
+    this.subirBeacon=this.subirBeacon.bind(this);
 
   }
   state = {
    open: false,
+   aceptado:false
  };
 
  handleOpen = () => {
@@ -47,6 +51,25 @@ class BeaconsActivos extends Component {
  handleClose = () => {
    this.setState({open: false});
  };
+
+ subirBeacon=()=>{
+
+  this.setState({
+    id:this.state.datos.id,
+    zona:this.state.datos.zona,
+    ubicacion:this.state.datos.ubiciacion,
+    referencia:this.state.datos.referencia,
+    tipo:this.state.datos.tipo
+  })
+
+   this.handleClose();
+ }
+
+ tomarDatos=(array)=>{
+   this.setState({
+     datos:array
+   })
+ }
 
   render() {
 
@@ -59,7 +82,7 @@ class BeaconsActivos extends Component {
          <FlatButton
            label="Aceptar"
            primary={true}
-           onClick={this.handleClose}
+           onClick={this.subirBeacon}
          />,
        ];
     return (
@@ -98,7 +121,7 @@ class BeaconsActivos extends Component {
          contentStyle={customContentStyle}
          open={this.state.open}
        >
-       <BeaconASubir/>
+       <BeaconASubir datos={this.tomarDatos}/>
        </Dialog>
 
       </MuiThemeProvider>

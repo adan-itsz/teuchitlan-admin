@@ -20,7 +20,6 @@ const style = {
 };
 const customContentStyle = {
   width: '75%',
-  height:'100%',
   maxWidth: 'none',
 };
 
@@ -28,11 +27,52 @@ const customContentStyle = {
 class SitiosHistoricos extends Component {
   constructor(){
     super();
-
+    this.tomarDatos=this.tomarDatos.bind(this);
   }
   state = {
    open: false,
+   datos:[],
+   fotos:[]
  };
+
+ subirSitio=()=>{
+   var imagenes=[];
+   var self= this;
+   var promesa=new Promise(
+     function(resolve,reject){
+
+      self.state.datos.fotos.map((item)=>(
+        resolve(imagenes=imagenes.concat(item))
+      ))
+    }
+  )
+  promesa.then(
+    function(){
+      imagenes.shift();
+      self.setState({
+        imagenes:imagenes,
+        id:self.state.datos.id,
+        nombre:self.state.datos.nombre,
+        idBeacon:self.state.datos.idBeacon,
+        datoHistorico:self.state.datos.datoHistorico,
+        datoCultural:self.state.datos.datoCultural,
+        datoCurioso:self.state.datos.datoCurioso,
+        datoInteres:self.state.datos.datoInteres
+
+      })
+      //llamada a metodo para subir a BD
+      console.log(self.state.id);
+      console.log(self.state.imagenes);
+    }
+  );
+    this.handleClose();
+ }
+
+ tomarDatos=(array)=>{
+   this.setState({
+     datos:array
+   })
+ }
 
  handleOpen = () => {
    this.setState({open: true});
@@ -53,7 +93,7 @@ class SitiosHistoricos extends Component {
          <FlatButton
            label="Aceptar"
            primary={true}
-           onClick={this.handleClose}
+           onClick={this.subirSitio}
          />,
        ];
     return (
@@ -91,7 +131,7 @@ class SitiosHistoricos extends Component {
            contentStyle={customContentStyle}
            open={this.state.open}
          >
-         <AddSitioHistorico/>
+         <AddSitioHistorico datos={this.tomarDatos}/>
          </Dialog>
 
       </MuiThemeProvider>

@@ -38,16 +38,64 @@ const styles = {
   },
 };
 
+function Lugar(){
+this.id;
+this.tipo;
+this.ubicacion;
+this.nombre;
+this.descripcion;
+this.fotos=[];
+}
+var lugar=new Lugar();
 
 class AddLugares extends Component {
 
+  constructor(props){
+    super(props)
+
+  }
   state={
     imagenes:[]
   }
 
-  previaImagenes=()=>{
+  handleIdLugar=(event)=>{
 
-  }
+    lugar.id=event.target.value;
+    this.props.datos(lugar);
+    this.setState({
+      idBeacon:event.target.value
+    })
+
+  };
+
+  handleTipo=(event)=>{
+    lugar.tipo=event.target.value;
+    this.props.datos(lugar);
+    this.setState({
+      tipo:event.target.value
+    })
+  };
+  handleUbicacion=(event)=>{
+    lugar.ubicacion=event.target.value;
+    this.props.datos(lugar);
+    this.setState({
+      ubicacion:event.target.value
+    })
+  };
+  handleNombre=(event)=>{
+    lugar.nombre=event.target.value;
+    this.props.datos(lugar);
+    this.setState({
+      nombre:event.target.value
+    })
+  };
+  handleDescripcion=(event)=>{
+    lugar.descripcion=event.target.value;
+    this.props.datos(lugar);
+    this.setState({
+      descripcion:event.target.value
+    })
+  };
 
   seleccionarFoto=(event)=>{
 
@@ -61,7 +109,7 @@ class AddLugares extends Component {
                 imagenes:this.state.imagenes.concat([{url:reader.result}]),
 
               });
-              console.log(file.webkitRelativePath);
+              lugar.fotos=this.state.imagenes;
           };
           reader.readAsDataURL(file);
       }
@@ -76,25 +124,29 @@ class AddLugares extends Component {
         <TextField
            hintText="ID "
            underlineStyle={styles.underlineStyle}
-         />
-         <div className="txt2">
+           onChange={this.handleIdLugar}
+         /><br/>
          <TextField
             hintText="Tipo"
             underlineStyle={styles.underlineStyle}
+            onChange={this.handleTipo}
           />
-          </div>
           <br /><br/>
           <TextField
              hintText="Ubicación geográfica"
              underlineStyle={styles.underlineStyle}
+             onChange={this.handleUbicacion}
+
            /><br /><br/>
            <TextField
               hintText="Nombre"
               underlineStyle={styles.underlineStyle}
+              onChange={this.handleNombre}
             /><br /><br/>
             <TextField
                hintText="Descripción"
                underlineStyle={styles.underlineStyle}
+               onChange={this.handleDescripcion}
              /><br /><br/>
 
              <input type='file' onChange={this.seleccionarFoto.bind(this)}/>
