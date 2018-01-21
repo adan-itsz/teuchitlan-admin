@@ -55,7 +55,8 @@ class AddLugares extends Component {
 
   }
   state={
-    imagenes:[]
+    imagenes:[],
+    imagenesPreview:[]
   }
 
   handleIdLugar=(event)=>{
@@ -105,9 +106,8 @@ class AddLugares extends Component {
           reader.onload = (e) => {
 
               this.setState({
-                imagPreview:reader.result,
-                imagenes:this.state.imagenes.concat([{url:reader.result}]),
-
+                imagenesPreview:this.state.imagenesPreview.concat([{url:reader.result}]),
+                imagenes:this.state.imagenes.concat([{url:file}])
               });
               lugar.fotos=this.state.imagenes;
           };
@@ -152,7 +152,7 @@ class AddLugares extends Component {
              <input type='file' onChange={this.seleccionarFoto.bind(this)}/>
           <div style={styles.root}>
              <GridList style={styles.gridList} cols={2.2}>
-               {this.state.imagenes.map((tile) => (
+               {this.state.imagenesPreview.map((tile) => (
                  <GridTile
                    key={tile}
                    actionIcon={<IconButton><StarBorder color="rgb(0, 188, 212)" /></IconButton>}

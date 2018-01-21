@@ -53,17 +53,23 @@ class BeaconsActivos extends Component {
  };
 
  subirBeacon=()=>{
+   var referencia=ref.child('Teuchitlan/beacons');
+   var referenciaPush=referencia.push();
+   var ubicacion=this.state.datos.ubicacion;
+   console.log(this.state.datos);
+   referenciaPush.set({
+     id:this.state.datos.id,
+     zona:this.state.datos.zona,
+     ubicacion:ubicacion,
+     referencia:this.state.datos.referencia,
+     tipo:this.state.datos.tipo,
+     key:referenciaPush.key
+   });
 
-  this.setState({
-    id:this.state.datos.id,
-    zona:this.state.datos.zona,
-    ubicacion:this.state.datos.ubiciacion,
-    referencia:this.state.datos.referencia,
-    tipo:this.state.datos.tipo
-  })
 
    this.handleClose();
  }
+
 
  tomarDatos=(array)=>{
    this.setState({

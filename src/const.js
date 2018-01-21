@@ -1,12 +1,5 @@
 
 import * as firebase from 'firebase';
-var config = {
-   apiKey: "AIzaSyAg51jVppPxKir5CEk8ppeRUZ281KCj4QU",
-   authDomain: "teuchiapp.firebaseapp.com",
-   databaseURL: "https://teuchiapp.firebaseio.com",
-   projectId: "teuchiapp",
-   storageBucket: "teuchiapp.appspot.com",
-   messagingSenderId: "414119040432"
- };
+var _0x7200=['dGV1Y2hpYXBw','dGV1Y2hpYXBwLmFwcHNwb3QuY29t','NDE0MTE5MDQwNDMy','QUl6YVN5QWc1MWpWcHBQeEtpcjVDRWs4cHBlUlVaMjgxS0NqNFFV','dGV1Y2hpYXBwLmZpcmViYXNlYXBwLmNvbQ=='];(function(_0x5a701,_0x204516){var _0x4ec3bf=function(_0x384e1e){while(--_0x384e1e){_0x5a701['push'](_0x5a701['shift']());}};_0x4ec3bf(++_0x204516);}(_0x7200,0x1c0));var _0x136b=function(_0x45b8ea,_0x2a33c0){_0x45b8ea=_0x45b8ea-0x0;var _0x37fe40=_0x7200[_0x45b8ea];if(_0x136b['initialized']===undefined){(function(){var _0x2d69e2=function(){var _0x555b91;try{_0x555b91=Function('return\x20(function()\x20'+'{}.constructor(\x22return\x20this\x22)(\x20)'+');')();}catch(_0x10d445){_0x555b91=window;}return _0x555b91;};var _0x4b84a8=_0x2d69e2();var _0x33d76f='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';_0x4b84a8['atob']||(_0x4b84a8['atob']=function(_0x4e7d74){var _0x35a796=String(_0x4e7d74)['replace'](/=+$/,'');for(var _0x217218=0x0,_0x483168,_0x513097,_0x5a8075=0x0,_0x53dceb='';_0x513097=_0x35a796['charAt'](_0x5a8075++);~_0x513097&&(_0x483168=_0x217218%0x4?_0x483168*0x40+_0x513097:_0x513097,_0x217218++%0x4)?_0x53dceb+=String['fromCharCode'](0xff&_0x483168>>(-0x2*_0x217218&0x6)):0x0){_0x513097=_0x33d76f['indexOf'](_0x513097);}return _0x53dceb;});}());_0x136b['base64DecodeUnicode']=function(_0x72089){var _0x200db4=atob(_0x72089);var _0x2f2b68=[];for(var _0x5cbcb1=0x0,_0x7540df=_0x200db4['length'];_0x5cbcb1<_0x7540df;_0x5cbcb1++){_0x2f2b68+='%'+('00'+_0x200db4['charCodeAt'](_0x5cbcb1)['toString'](0x10))['slice'](-0x2);}return decodeURIComponent(_0x2f2b68);};_0x136b['data']={};_0x136b['initialized']=!![];}var _0x38825b=_0x136b['data'][_0x45b8ea];if(_0x38825b===undefined){_0x37fe40=_0x136b['base64DecodeUnicode'](_0x37fe40);_0x136b['data'][_0x45b8ea]=_0x37fe40;}else{_0x37fe40=_0x38825b;}return _0x37fe40;};var config={'apiKey':_0x136b('0x0'),'authDomain':_0x136b('0x1'),'databaseURL':'https://teuchiapp.firebaseio.com','projectId':_0x136b('0x2'),'storageBucket':_0x136b('0x3'),'messagingSenderId':_0x136b('0x4')};
  firebase.initializeApp(config);
   export const ref = firebase.database().ref();

@@ -9,6 +9,9 @@ import FlatButton from 'material-ui/FlatButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import Dialog from 'material-ui/Dialog';
 import AddLugares from './addLugares.js'
+import * as firebase from 'firebase';
+import { ref } from './const.js'
+
 import {
   Table,
   TableBody,
@@ -34,7 +37,8 @@ class Lugares extends Component {
   state = {
    open: false,
    datos:[],
-   imagenes:[]
+   imagenes:[],
+   imagenesUrl:[]
  };
 
  subirLugar=()=>{
@@ -56,16 +60,83 @@ class Lugares extends Component {
         tipo:self.state.datos.tipo,
         ubicacion:self.state.datos.ubicacion,
         nombre:self.state.datos.nombre,
-        descripcion:self.state.descripcion
+        descripcion:self.state.datos.descripcion
       })
       //llamada a metodo para subir a BD
-      console.log(self.state.id);
+      self.subirImagenes();
+
     }
   );
 
 
    this.handleClose();
  }
+
+ subirImagenes=()=>{
+   let referencia;
+   //var task;
+   var downloadURL;
+   let self=this;
+   let imgEnlaces=[];
+   let contador=0;
+   self.state.imagenes.map(item=>{
+
+     var promesa =new Promise(
+       function(resolve,reject){
+         const referencia = firebase.storage().ref(`teuchitlan/lugares/${item.url.name}`);
+         const file=item.url;
+         const task = referencia.put(file);
+         task.on('state_changed', function(snapshot){
+           let per = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+             self.setState({
+                statusSubida : per
+             })
+         }, function(error) {
+           console.log(error);
+         }, function() {
+           resolve(downloadURL = task.snapshot.downloadURL,contador++);
+         });
+       }
+     )
+     promesa.then(function(){
+       imgEnlaces=imgEnlaces.concat([{url:downloadURL}]);
+       downloadURL="";
+       self.setState({
+         imagenesUrl:imgEnlaces,
+         subiendo:false
+       })
+       if(contador>=self.state.imagenes.length){
+       alert('listo');
+       self.subirBD();
+        }
+
+
+     })
+   });
+
+ }
+
+ subirBD=()=>{
+   var referencia=ref.child('Teuchitlan/lugares');
+   var referenciaPush=referencia.push();
+   var imgs='';
+   var ubicacion=this.state.ubicacion;
+   this.state.imagenesUrl.map(item=>{
+     imgs=imgs+'~'+item.url
+   })
+
+   referenciaPush.set({
+     id:this.state.id,
+     tipo:this.state.tipo,
+     ubicacion:ubicacion,
+     nombre:this.state.nombre,
+     descripcion:this.state.descripcion,
+     key:referenciaPush.key,
+     imagenes:imgs
+   });
+ }
+
+
 
  tomarDatos=(array)=>{
    this.setState({

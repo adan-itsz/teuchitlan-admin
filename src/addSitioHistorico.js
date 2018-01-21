@@ -59,7 +59,8 @@ class AddSitioHistorico extends Component {
   }
 
   state={
-    imagenes:[{url:'http://v.fastcdn.co/u/abda26b9/20243556-0-react-logo.png'}]
+    imagenes:[],
+    imagenesPreview:[{url:'http://v.fastcdn.co/u/abda26b9/20243556-0-react-logo.png'}]
   }
 
   handleIdSitio=(event)=>{
@@ -69,7 +70,7 @@ class AddSitioHistorico extends Component {
 
   };
 
-  handlenombre=(event)=>{
+  handleNombre=(event)=>{
 
     sitio.nombre=event.target.value;
     this.props.datos(sitio);
@@ -117,9 +118,8 @@ class AddSitioHistorico extends Component {
           reader.onload = (e) => {
 
               this.setState({
-                imagPreview:reader.result,
-                imagenes:this.state.imagenes.concat([{url:reader.result}]),
-
+                imagenesPreview:this.state.imagenesPreview.concat([{url:reader.result}]),
+                imagenes:this.state.imagenes.concat([{url:file}])
               });
               sitio.fotos=this.state.imagenes
           };
@@ -166,7 +166,7 @@ class AddSitioHistorico extends Component {
               <input type='file' onChange={this.seleccionarFoto.bind(this)}/>
               <div style={styles.root}>
                  <GridList style={styles.gridList} cols={2.2}>
-                   {this.state.imagenes.map((tile) => (
+                   {this.state.imagenesPreview.map((tile) => (
                      <GridTile
                        key={tile}
                        actionIcon={<IconButton><StarBorder color="rgb(0, 188, 212)" /></IconButton>}

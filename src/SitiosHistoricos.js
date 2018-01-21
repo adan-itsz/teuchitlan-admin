@@ -12,6 +12,9 @@ import Avatar from 'material-ui/Avatar';
 import Subheader from 'material-ui/Subheader';
 import './AppWeb.css'
 import AddSitioHistorico from './addSitioHistorico.js'
+import * as firebase from 'firebase';
+import { ref } from './const.js'
+
 
 let SelectableList = makeSelectable(List);
 
@@ -32,7 +35,8 @@ class SitiosHistoricos extends Component {
   state = {
    open: false,
    datos:[],
-   fotos:[]
+   fotos:[],
+   imagenurl:[]
  };
 
  subirSitio=()=>{
@@ -48,7 +52,6 @@ class SitiosHistoricos extends Component {
   )
   promesa.then(
     function(){
-      imagenes.shift();
       self.setState({
         imagenes:imagenes,
         id:self.state.datos.id,
@@ -61,11 +64,72 @@ class SitiosHistoricos extends Component {
 
       })
       //llamada a metodo para subir a BD
-      console.log(self.state.id);
-      console.log(self.state.imagenes);
+      self.subirImagenes();
     }
   );
     this.handleClose();
+ }
+
+ subirImagenes=()=>{
+   let referencia;
+   let task;
+   let downloadURL;
+   let imgEnlaces=[];
+   let contador=0;
+   let self=this;
+   this.state.imagenes.map(function(item){
+      console.log(item.url);
+     referencia = firebase.storage().ref(`teuchitlan/SitiosHistoricos/${item.url.name}`),
+     task = referencia.put(item.url);
+     var promesa =new Promise(
+       function(resolve,reject){
+         task.on('state_changed', function(snapshot){
+           let per = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+             self.setState({
+                statusSubida : per
+             })
+         }, function(error) {
+           console.log(error);
+         }, function() {
+         resolve(downloadURL = task.snapshot.downloadURL,contador++);
+         });
+       }
+     )
+     promesa.then(function(){
+       imgEnlaces=imgEnlaces.concat([{url:downloadURL}]);
+       downloadURL="";
+       self.setState({
+         imagenurl:imgEnlaces,
+         subiendo:false
+       })
+       if(contador>=self.state.imagenes.length){
+       alert('listo');
+       self.subirBD();
+        }
+     })
+   });
+
+ }
+ subirBD=()=>{
+   var referencia=ref.child('Teuchitlan/SitiosHistoricos');
+   var referenciaPush=referencia.push();
+   var imgs="";
+   var ubicacion=this.state.ubicacion;
+   this.state.imagenurl.map(item=>{
+     imgs=imgs+'~'+item.url
+   })
+
+   referenciaPush.set({
+     id:this.state.id,
+     nombre:this.state.nombre,
+     idBeacon:this.state.idBeacon,
+     datoHistorico:this.state.datoHistorico,
+     datoCultural:this.state.datoCultural,
+     datoCurioso:this.state.datoCurioso,
+     datoInteres:this.state.datoInteres,
+     key:referenciaPush.key,
+     imagenes:imgs
+   });
  }
 
  tomarDatos=(array)=>{
